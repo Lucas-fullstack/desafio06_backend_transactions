@@ -1,10 +1,10 @@
 {
-  "type": "postgres",
+  "type": "mysql",
   "host": "localhost",
-  "port": 5432,
-  "username": "postgres",
-  "password": "docker",
-  "database": "gostack_desafio06",
+  "port": 3306,
+  "username": "root",
+  "password": "user2754",
+  "database": "typeorm_financial_transactions",
   "entities": ["./src/models/*.ts"],
   "migrations": ["./src/database/migrations/*.ts"],
   "cli": {
