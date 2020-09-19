@@ -26,27 +26,26 @@ class CreateTransactionService {
     const { total } = await transactionsRepository.getBalance();
 
     if (type === 'outcome' && total < value) {
-      throw new AppError(' You do not have enough balance');
+      throw new AppError('You dont have money!');
     }
-    let transactionCategory = await categoryRepository.findOne({
-      where: {
-        title: category,
-      },
+
+    let categoryTransaction = await categoryRepository.findOne({
+      where: { title: category },
     });
 
-    if (!transactionCategory) {
-      transactionCategory = categoryRepository.create({
+    if (!categoryTransaction) {
+      categoryTransaction = categoryRepository.create({
         title: category,
       });
 
-      await categoryRepository.save(transactionCategory);
+      await categoryRepository.save(categoryTransaction);
     }
 
     const transaction = transactionsRepository.create({
       title,
       value,
       type,
-      category: transactionCategory,
+      category: categoryTransaction,
     });
 
     await transactionsRepository.save(transaction);
