@@ -1,20 +1,19 @@
+import { Request } from 'express-serve-static-core';
+
 import { getCustomRepository } from 'typeorm';
-
 import AppError from '../errors/AppError';
-
-import TransactionsRepository from '../repositories/TransactionsRepository';
+import Transaction from '../models/Transaction';
+import TransactionRepository from '../repositories/TransactionsRepository';
 
 class DeleteTransactionService {
   public async execute(id: string): Promise<void> {
-    const transactionsRepository = getCustomRepository(TransactionsRepository);
-
-    const transaction = await transactionsRepository.findOne(id);
-
+    const transactionRepository = getCustomRepository(TransactionRepository);
+    const transaction = await transactionRepository.findOne(id);
     if (!transaction) {
-      throw new AppError('Transaction not found!');
+      throw new AppError('Transcation does not exist');
     }
 
-    await transactionsRepository.remove(transaction);
+    await transactionRepository.remove(transaction);
   }
 }
 
