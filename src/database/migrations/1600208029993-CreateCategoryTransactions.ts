@@ -9,7 +9,7 @@ export default class CreateCategoryTransactions1600208029993
         columns: [
           {
             name: 'id',
-            type: 'varchar',
+            type: 'uuid',
             isPrimary: true,
             generationStrategy: 'uuid',
           },
